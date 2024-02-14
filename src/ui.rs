@@ -7,12 +7,16 @@ use ratatui::{
 
 use crate::app::App;
 
-use chrono::{Datelike, NaiveDateTime};
+use chrono::{Datelike, NaiveDateTime, Utc, TimeZone, Local};
 
 fn format_time(t: u128) -> String{
-    let date_time = NaiveDateTime::from_timestamp_millis(t as i64);
-    return date_time.unwrap()
-        .format("%H:%M:%S").to_string();
+    let dt = Utc.from_utc_datetime(
+        &NaiveDateTime::from_timestamp_millis(t as i64)
+            .unwrap()
+    );
+    return dt
+        .with_timezone(&Local)
+        .format("%H:%M:%S (%Z)").to_string();
 }
 
 fn format_duration(duration: u128) -> String{
