@@ -30,10 +30,14 @@ fn format_duration(duration: u128) -> String{
 
 fn create_one_bar_widget(app: &App, pos: Option<usize>) -> impl Widget{
     let posi = pos.unwrap_or(app.ipos);
-    let t1 = app.prayer_times[posi].time;
-    let t2 = app.prayer_times[posi + 1].time;
+    let t1 = if app.show_fasting_time {app.prayer_times[app.previous_icha + 1].time}
+                else {app.prayer_times[posi].time};
+    let t2 = if app.show_fasting_time {app.prayer_times[app.previous_icha + 6].time} 
+                else {app.prayer_times[posi + 1].time};
+    // let t2 = app.prayer_times[posi + 1].time;
 
-    let title = " ".to_string() + &app.prayer_times[posi + 1].name + " ";
+    let title = if app.show_fasting_time {" Fasting time ".to_owned()}
+                else { " ".to_string() + &app.prayer_times[posi + 1].name + " "};
 
     let r: f64 = if app.now < t1 {
         0.0
@@ -81,7 +85,7 @@ pub fn render(app: &mut App, f: &mut Frame) {
         return;
     }
 
-    let show_full = f.size().height > 35;
+    let show_full = f.size().height > 35 && !app.show_fasting_time;
     let layout_1 = Layout::new(
         Direction::Vertical,
         [

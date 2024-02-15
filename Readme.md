@@ -26,10 +26,11 @@ The default value of data file is `./data/prayer_times.txt`
 
 ### keyboard shortcuts
 - `t` : switch between time and remaining time for prayer
+- `f` : switch between next prayer time and fasting end time (Maghrib)
 - `q` : quit
 
 ### Data Generation
-- not yet published
+You can use [generate-prayer-time](https://github.com/yousfiSaad/generate-prayer-time) to generate data according to your location.
 
 ## Screenshots
 

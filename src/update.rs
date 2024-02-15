@@ -14,7 +14,8 @@ pub fn update(app: &mut App, key_event: KeyEvent) {
                 app.quit()
             }
         }
-        KeyCode::Char('f') | KeyCode::Char('t') => app.toggle_time_duration(),
+        KeyCode::Char('t') => app.toggle_time_duration(),
+        KeyCode::Char('f') => app.toggle_fastring_time(),
         _ => {}
     };
 }

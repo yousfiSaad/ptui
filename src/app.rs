@@ -18,7 +18,10 @@ pub struct App {
     /// should the application exit?
     pub should_quit: bool,
 
+    //todo: change to unums
     pub show_remaining_time: bool,
+
+    pub show_fasting_time: bool,
 
     pub now: u128,
 
@@ -87,6 +90,10 @@ impl App {
     /// Set should_quit to true to quit the application.
     pub fn quit(&mut self) {
         self.should_quit = true;
+    }
+
+    pub fn toggle_fastring_time(&mut self){
+        self.show_fasting_time = !self.show_fasting_time;
     }
 
     pub fn toggle_time_duration(&mut self){
